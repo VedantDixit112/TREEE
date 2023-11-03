@@ -1,0 +1,18 @@
+class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
+         List<List<Integer>>res=new ArrayList<>();
+         path(root,new ArrayList(),target,res);
+         return res;
+    }
+    public static void path(TreeNode root,List<Integer>path,int target,List<List<Integer>>res){
+        if(root==null){
+            return ;
+        }
+        path.add(root.val);
+        if(root.left==null && root.right==null && target==root.val){
+            res.add(path);
+        }
+        path(root.left,new ArrayList(path),target-root.val,res);
+        path(root.right,new ArrayList(path),target-root.val,res);
+    }
+}
