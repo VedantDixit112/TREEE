@@ -1,0 +1,19 @@
+class Solution {
+    int val=0;
+    public int goodNodes(TreeNode root) {
+        int max=root.val;
+        good(root,root.val);
+        return val;
+    }
+    public void good(TreeNode root,int max){
+        if(root==null){
+            return ;
+        }
+        if(root.val>=max){
+            val++;
+        }
+        max=Math.max(max,root.val);
+        good(root.left,max);
+        good(root.right,max);
+    }
+}
