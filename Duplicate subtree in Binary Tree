@@ -1,0 +1,23 @@
+class Solution {
+    List<TreeNode>ans=new ArrayList<>();
+    Map<String,Integer>map=new HashMap<>();
+    Set<String>set=new HashSet<>();
+    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+        inorder(root);
+        return ans;
+    }
+    public String inorder(TreeNode root){
+        if(root==null){
+            return "";
+        }
+        String left=inorder(root.left);
+        String right=inorder(root.right);
+        String s=root.val+" "+left+" "+right;
+        map.put(s,map.getOrDefault(s,0)+1);
+        if(!set.contains(s) && map.get(s)>1){
+            set.add(s);
+            ans.add(root);
+        }
+        return s;
+    }
+}
