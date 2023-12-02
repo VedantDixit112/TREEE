@@ -1,0 +1,39 @@
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode>res=new ArrayList<>();
+        List<TreeNode>res1=new ArrayList<>();
+        Map<Integer,Integer>map=new HashMap<>();
+        path(root,p,res);
+        path(root,q,res1);
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<res.size();i++){
+            map.put(res.get(i).val,i);
+        }
+        for(int j=0;j<res1.size();j++){
+            if(map.containsKey(res1.get(j).val)){
+                return res1.get(j);
+            }
+        }
+        return null;
+    }
+     public boolean path(TreeNode root,TreeNode target,List<TreeNode>ans){
+        if(root==null){
+            return false;
+        }
+        if(root.val==target.val){
+            ans.add(root);
+            return true;
+        }
+        boolean fir=path(root.left,target,ans);
+        if(fir){
+            ans.add(root);
+            return true;
+        }
+        boolean fic=path(root.right,target,ans);
+        if(fic){
+            ans.add(root);
+            return true;
+        }
+         return false;
+    }
+}
