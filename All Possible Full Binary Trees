@@ -1,0 +1,26 @@
+class Solution {
+    public List<TreeNode> allPossibleFBT(int n) {
+        return helper(n);
+    }
+    public List<TreeNode> helper(int n){
+        if(n==1){
+            List<TreeNode>ans=new ArrayList<>();
+            ans.add(new TreeNode(0));
+            return ans;
+        }
+        List<TreeNode>ans=new ArrayList<>();
+        for(int i=1;i<n;i+=2){
+            List<TreeNode>l=helper(i);
+            List<TreeNode>r=helper(n-i-1);
+            for(TreeNode lf:l){
+                for(TreeNode rf:r){
+                    TreeNode root=new TreeNode(0);
+                    root.left=lf;
+                    root.right=rf;
+                    ans.add(root);
+                }
+            }
+        }
+        return ans;
+    }
+}
