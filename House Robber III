@@ -1,0 +1,28 @@
+class Solution {
+    Map<String,Integer>map;
+    public int rob(TreeNode root) {
+        map=new HashMap<>();
+        int a1=path(root,0);
+        return a1;
+    }
+    public int path(TreeNode root,int t){
+        if(root==null){
+            return 0;
+        }
+        StringBuilder sb=new StringBuilder();
+        sb.append(root);
+        sb.append(t);
+        if(map.containsKey(sb.toString())){
+            return map.get(sb.toString());
+        }
+        int max=Integer.MIN_VALUE;
+        if(t==0){
+            int a=root.val+path(root.left,1)+path(root.right,1);
+            max=Math.max(max,a);
+        }
+        int b=path(root.left,0)+path(root.right,0);
+        max=Math.max(max,b);
+        map.put(sb.toString(),max);
+        return max;
+    }
+}
